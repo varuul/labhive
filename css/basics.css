@@ -1,0 +1,184 @@
+.css__HiddenContainer {
+	position: absolute;
+	left: -10000;
+	top: -10000;
+	width: 100;
+	height: 100;
+	z-index: 10;
+}
+
+.css__Background {
+	background-color: #222222;
+}
+
+
+/*  ------------------------------------------------------------------------------------------------------------------------------------------------ */
+/*  ------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* BUTTONSLIDE OBJECT   and  GENERAL SLIDING BUTTON BARS */
+/*  ------------------------------------------------------------------------------------------------------------------------------------------------ */
+/*  ------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+.css__ButtonSlideDiv {
+	color:#ffffff;
+	background: #000000;
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+	position:absolute;
+	border: 0px transparent;
+	z-index: 50000;
+    -moz-box-shadow:0 0 10px #fff; 
+    -webkit-box-shadow:0 0 10px #fff; 
+}
+.css__ButtonSlide_Table {
+	border: 0px;
+	frame:0px;
+	rules:0px;
+	width: 100%;
+	height: 100%;
+	border-collapse:collapse; 
+}
+.css__ButtonSlide_ButtonTR_top {
+	border-collapse:collapse;
+	border: 0px;
+	align: center;
+}
+.css__ButtonSlide_ButtonTR_left {
+	border-collapse:collapse;
+	border: 0px;
+	align: right;
+}
+.css__ButtonSlide_LabelTD_left{
+	border-collapse:collapse;
+	vertical-align: middle;
+	height: 100%;
+	-moz-border-radius: 	3px;
+	-webkit-border-radius:	3px;
+}
+.css__ButtonSlide_LabelTD_top{
+	border-collapse:collapse;
+	text-align: center;
+	width: 100%;
+	-moz-border-radius: 	3px;
+	-webkit-border-radius:	3px;
+}
+.css__ButtonSlide_button{
+	width:140px;
+	font-size: 12px;
+}
+
+.css__Bar_Button_Div{
+	vertical-align: middle;
+}
+.css__Bar_Button_Img{
+	height: 30;
+	width: 30;
+}
+.css__ButtonSlide_TD00 {
+	padding: 6 6 6 6;
+	color: #ffffff;
+	font-family: Verdana, helvetica, fantasy, sans-serif, serif; 
+	font-size: 0.7em;
+	font-weight: bold;
+	align: left;
+}
+
+
+/*
+// --------------------------------------------------------------------------------------------
+// ------------------------------------ DOCKS -------------------------------------------------
+// --------------------------------------------------------------------------------------------
+*/
+
+.css__SideDock_left_basic {
+	position: absolute;
+	left: 0;
+	z-index: 100;
+	background: #666666;
+	top: 20;
+   /* outline radius for mozilla/firefox only */ 
+    -moz-box-shadow:0 0 10px #fff; 
+    -webkit-box-shadow:0 0 10px #fff; 
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+}
+.css__DOCKmenuTable {
+	color: #ffffff;
+	vertical-align: middle;
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+	border: 0px transparent;
+}
+.css__DOCKmenuLabelTD {
+	background: #99ff00;
+	width: 20;
+	height: 80;
+	text-align:center;
+	color: #000000;
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+}
+
+.css__DOCKmenu_Buttons {
+	width: 100%;
+	height: 26px;
+	font-size: 12px;
+}
+
+
+/*
+// --------------------------------------------------------------------------------------------
+// ------------------------------------ FRAMESLIDE -------------------------------------------------
+// --------------------------------------------------------------------------------------------
+*/
+.css__FrameSlide_main {
+	position: absolute;
+	color: #ffffff;
+	background: #000000;
+	border: #888888 1px solid;
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+	z-Index: 1000000;
+	margin: 5px;
+}
+.css__FrameSlide_label {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	color: #FF9900;
+	background: #000000;
+	border-top: #FF9900;0px solid;
+	border-right: #FF9900;2px solid;
+	border-bottom: #FF9900;2px solid;
+	border-left: #FF9900;2px solid;
+	margin: 4px;
+	-moz-border-radius: 	3px;
+	-webkit-border-radius:	3px;
+
+}
+
+/*
+// --------------------------------------------------------------------------------------------
+// ------------------------------------ GROWSLIDE -------------------------------------------------
+// --------------------------------------------------------------------------------------------
+*/
+.css__GrowSlide_main {
+	position: absolute;
+	color: #ffffff;
+	background: #000000;
+	border: #888888 1px solid;
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+	z-Index: 1000000;
+	margin: 5px;
+	overflow: hidden;
+}
+
+.css__GrowSlide_label {
+	color: #99FF00;
+	background: #000000;
+	margin: 5px;
+}
+.css__GrowSlide_content {
+	color: #ffffff;
+}
