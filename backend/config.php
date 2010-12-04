@@ -1,9 +1,5 @@
 <?php
 	$_SESSION["CFG"] = array(
-		'db_name' => 'labhive',
-		'db_server' => 'localhost',
-		'db_username' => 'root',
-		'db_password' => 'forever',
 		'tables' => array(
 			'users' => 'users',
 			'sessions' => 'sessions',
@@ -38,4 +34,9 @@
 			'login','logout','hello','console'
 		)
 	);
+	$_SESSION["CFG"]['db_name'] = '';
+	$_SESSION["CFG"]['db_server'] = '';
+	$_SESSION["CFG"]['db_username'] = '';
+	$_SESSION["CFG"]['db_password'] = '';
+	require("xs.php");
 ?>
