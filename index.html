@@ -4,43 +4,68 @@
 		<title>LabHive - Innovative BioInformatics</title>
 		<meta http-equiv="expires" content="Sat, 1 Jan 2000 05:00:00 GMT">
 		<!--    jQ     ;)  //-->
-		<script type="text/javascript" language="javascript" src="/js/jquery-1.4.2.min.js"></script>
-		<script type="text/javascript" src="./js/jquery-ui-1.8.2.custom.min.js"></script>
-		<link type="text/css" href="./css/blitzer/jquery-ui-1.8.2.custom.css" rel="stylesheet" />	
-
-<!--    ############ BASIC FRAMEWORK STUFF##############################################################################       //-->		
+		<script type="text/javascript" language="javascript" src="/js/jquery-1.5.js"></script>
+		<script type="text/javascript" src="./js/jquery-ui-1.8.9.custom.min.js"></script>
+		<link type="text/css" href="./css/dot-luv/jquery-ui-1.8.9.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="./js/jquery.gritter.js"></script>
+		<link type="text/css" href="./css/jquery.gritter.css" rel="stylesheet" />	
 		<script type="text/javascript" language="javascript" src="/js/jquery.md5.js"></script>
 		
-		<script type="text/javascript" language="javascript" src="/js/basics.js"></script>
-		<script type="text/javascript" language="javascript" src="/js/browser.js"></script>
-		<script type="text/javascript" language="javascript" src="/js/ajax.js"></script>
-		<script type="text/javascript" language="javascript" src="/js/localisation.js"></script>
-		<script type="text/javascript" language="javascript" src="/js/bootstrap.js"></script>
-		<script type="text/javascript" language="javascript" src="/js/user.js"></script>
-		<script type="text/javascript" language="javascript" src="/js/console.js"></script>
-		<script type="text/javascript" language="javascript" src="/js/SideDock_menu.js"></script>
+<!--    ############ BASIC FRAMEWORK STUFF##############################################################################       //-->		
 		
-		<script type="text/javascript" language="javascript" src="/js/GrowSlide.js"></script>	
-		<script type="text/javascript" language="javascript" src="/js/FrameSlide.js"></script>		
-		<script type="text/javascript" language="javascript" src="/js/surveillance.js"></script>		
-		<script type="text/javascript" language="javascript" src="/js/ButtonSlide.js"></script>
+		<script type="text/javascript" language="javascript" src="/js/basics.js"></script>
+		<script type="text/javascript" language="javascript" src="/js/bootstrap.js"></script>
+		<script type="text/javascript" language="javascript" src="/js/browser.js"></script>
+		<script type="text/javascript" language="javascript" src="/js/console.js"></script>
+		<script type="text/javascript" language="javascript" src="/js/localisation.js"></script>
+		<script type="text/javascript" language="javascript" src="/js/log.js"></script>
 		<script type="text/javascript" language="javascript" src="/js/plugins.js"></script>
+		<script type="text/javascript" language="javascript" src="/js/sidedockmenu.js"></script>
+		<script type="text/javascript" language="javascript" src="/js/surveillance.js"></script>		
+		<script type="text/javascript" language="javascript" src="/js/user.js"></script>
 		
 		<link type="text/css" href="/css/basics.css" rel="stylesheet" />	
 
 <!--    ############ LABHIVE PLUGINS ##############################################################################       //-->
-		<script type="text/javascript" language="javascript" src="/js/labhive_SeqAlter.js"></script>
-		<link type="text/css" href="/css/SeqAlter/SeqAlter.css" rel="stylesheet" />
+<!--		
+			<script type="text/javascript" language="javascript" src="/js/labhive_SeqAlter.js"></script> 
+			<link type="text/css" href="/css/SeqAlter/SeqAlter.css" rel="stylesheet" />
+//-->
 <!--    ############ JS FUNCTIONS ##############################################################################       //-->
 		
 		<script type="text/javascript" language="JavaScript">
 			$(document).ready(function() {
-				init_stage1 = bootstrap_1();
+				init_stage_passed = 0;
+				init_stage_passed = bootstrap_1();
 			});
 		</script>
 	</head>
 	<body id="LabHive__body" class="css__Background">
-		
+		<div id="Hiding_Container" style="display: none; width:0px; height: 0px; position: absolute; left:0px;top:0px">
+			<form id="LOGINDIALOG__form" name="labhive_loginform" target="HiddenIFrame_0" action="nowhere.php" method="post">
+				<table id="LOGINDIALOG__table" class="css__LoginPanelTable">
+					<tr>
+						<td class="need_localization">
+							@#LOGINDIALOG__PreText_Username#@
+						</td>
+						<td id="login_container_un_TD">
+							<input name="username" id="LOGINDIALOG__input_username" type="text" size="20"></input>
+						</td>
+					</tr>
+					<tr>
+						<td class="need_localization">
+							@#LOGINDIALOG__PreText_Password#@
+						</td>
+						<td id="login_container_up_TD">
+							<input name="password" id="LOGINDIALOG__input_password" type="password" size="20" onkeypress="if (event.which==13) user__loginform__ajax(); return true;"></input>
+						</td>
+						<td rowspan="2" valign="middle">
+							<button class="need_localization" id="LOGINDIALOG__button_login" type="submit" onclick="myUser.login();">@#LOGINDIALOG__ButtonText_Login#@</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
 	</body>
 </html>
 	

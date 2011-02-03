@@ -1,24 +1,2 @@
-<form id="LOGINDIALOG__form" name="__loginform" target="HiddenIFrame_01" action="/backend/logindummy.php" method="post">
-	<table id="LOGINDIALOG__table" class="css__LoginPanelTable">
-		<tr>
-			<td>
-				@#LOGINDIALOG__PreText_Username#@
-			</td>
-			<td>
-				<input name="username" id="LOGINDIALOG__input_username" type="text" size="20"></input>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				@#LOGINDIALOG__PreText_Password#@
-			</td>
-			<td>
-				<input name="password" id="LOGINDIALOG__input_password" type="password" size="20" onkeypress="if (event.which==13) user__loginform__ajax(); return true;"></input>
-			</td>
-			<td rowspan="2" valign="middle">
-				<button id="LOGINDIALOG__button_login" onclick="USER__login();">@#LOGINDIALOG__ButtonText_Login#@</button>
-				<button style="display:none;" type="submit" id="LOGINDIALOG__button_HiddenSubmit"></button>
-			</td>
-		</tr>
-	</table>
-</form>
+<div id="login_dialog_container">
+</div>

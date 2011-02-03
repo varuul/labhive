@@ -24,6 +24,9 @@
 		);
 		$myQuery = DB_QueryReplace($_QU["get_userid_by_session"], $RepArray);
 		$Res = mysql_query($myQuery);	
+		if ($Res == false) {
+			return false;
+		}
 		$RowCount = mysql_num_rows($Res);
 		if ($RowCount == 1) {
 			$row = mysql_fetch_array($Res, MYSQL_ASSOC);

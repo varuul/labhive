@@ -1,4 +1,5 @@
 aSurveillance = function() {
+	var thisSurveillance = this;
 	this.Checks = new Array();
 	// CHECKOBJECT {
 	//		id: "MyGreatTimedAndRuledCheck"
@@ -9,7 +10,6 @@ aSurveillance = function() {
 	//
 	this.SurveillanceDialogId = "none";
 	this.InfoDialog = function() {
-		//DIALOG__call(title, content, autoclosedelay, noclose, animate, uponClose,Position,noOverlay,resize,onShow) 
 		this.SurveillanceDialogId = DIALOG__call("surveillance", "lastcheck <span id='surveillance_lastcheck'>0000</span>", 0, false,"",function() {}, null,true,false,function(){});
 	}
 	
@@ -40,29 +40,51 @@ aSurveillance = function() {
 	}
 	
 	this.runChecks = function() {
-		var now =  tools__NOW();
+		this.lastcheck = tools__NOW();
 		if (this.SurveillanceDialogId!="none") {
 			$("#"+this.SurveillanceDialogId).dialog("open");
-			$("#surveillance_lastcheck").html(now);
+			$("#surveillance_lastcheck").html(this.lastcheck);
 		}
-		for (var i=0;i<this.Checks.length;i++) {
-			if (now>this.Checks[i].nextCheckTime) {
-				if (this.Checks[i].checkRule) {
-					this.Checks[i].nextCheckTime = now + this.Checks[i].checkInterval
-					this.Checks[i].myCheck();
+		if (!isEmpty(this.Checks)) {
+			for (var i=0;i<this.Checks.length;i++) {
+				if (this.lastcheck>this.Checks[i].nextCheckTime) {
+					if (this.Checks[i].checkRule) {
+						this.Checks[i].nextCheckTime = this.lastcheck + this.Checks[i].checkInterval
+						this.Checks[i].myCheck();
+					}
 				}
 			}
 		}
-		this.lastcheck = now;
-		setTimeout("mySurveillance.runChecks();",mySurveillance.interval);
+		var DelayWrapper = function() {
+			return (function() { thisSurveillance.runChecks(); })();
+		}
+		setTimeout(DelayWrapper,this.interval);
 	}
-	
+
 	this.lastcheck = tools__NOW();
-	// DIALOG__call(title, content, autoclosedelay, noclose, animate, uponClose,Position,noOverlay,resize,onShow) 
 }
+
 
 function tools__NOW() {
 	var dateNow = new Date();
 	var ms = Date.parse(dateNow);
 	return ms;
 }
+
+
+
+// this is a newly introduced object that will do constant checks and thereby work as  a global, subscibable timer...
+mySurveillance = new aSurveillance();
+mySurveillance.interval = 50;
+setTimeout("mySurveillance.runChecks();",mySurveillance.interval);
+
+
+
+
+
+
+
+
+
+
+

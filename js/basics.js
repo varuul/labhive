@@ -1,38 +1,11 @@
-String.prototype.trim = function() {
-	return this.replace(/^\s+|\s+$/g,"");
-}
-String.prototype.ltrim = function() {
-	return this.replace(/^\s+/,"");
-}
-String.prototype.rtrim = function() {
-	return this.replace(/\s+$/,"");
-}
-Array.prototype.unique = function () {
-	var r = new Array();
-	o:for(var i = 0, n = this.length; i < n; i++)
-	{
-		for(var x = 0, y = r.length; x < y; x++)
-		{
-			if(r[x]==this[i])
-			{
-				continue o;
-			}
-		}
-		r[r.length] = this[i];
-	}
-	return r;
-}
-
-Array.prototype.indexOf = function(search) {
-	for (var i=0; i< this.length; i++) {
-		if (search==this[i]) return i;
-	}
-	return -1;
-}
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------- generating unique IDs with DOM-check and more  -------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 function tools_randomid(length,numeric,charsonly, makeUnique) {		// this generates a random string from safe chars
-	// version TW 02.08.2010 14.00
 	if (isEmpty(numeric) || numeric != true) numeric = false;
 	if (isEmpty(makeUnique) || makeUnique != true) makeUnique = false;
 	var rid = "";
@@ -62,8 +35,15 @@ function tools_randomid(length,numeric,charsonly, makeUnique) {		// this generat
 	return rid;
 }
 
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------- generating a random number within specific bounds  -------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function tools_MakeRandomNumber(min,max) {
+	if (typeof min == "undefined") min = 0;
+	if (typeof max == "undefined") max = 100;
 	if (min>max) {
 		return(-1);
 	}
@@ -74,14 +54,23 @@ function tools_MakeRandomNumber(min,max) {
 	return (rnd + min <= max ? rnd + min : rnd);
 }
 
-function tools_JSONparser(data) {    // copied from here: http://encosia.com/2009/07/07/improving-jquery-json-performance-and-security/
-	var Empty = {};
-	if (data == undefined || data == "") return Empty;
-	if (typeof (JSON) !== 'undefined' && typeof (JSON.parse) === 'function')
-		return JSON.parse(data);
-	else
-		return eval('(' + data + ')');
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------- simple content check  -------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+function isEmpty(variable) {
+	if (typeof variable == "undefined") return true;
+	if (variable == "") return true;
+	return false;
 }
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------- building simple jqUI based dialogs  -------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function Dialog_build(title,contents) {
 	if ($("#_dialogs_container").length==0) {
@@ -101,6 +90,14 @@ function Dialog_build(title,contents) {
 	return DiID;
 }
 
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------- Standard Time Format  -------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 function DateTime_Now() {
 	var today = new Date();
 	var h=today.getHours();
@@ -111,11 +108,17 @@ function DateTime_Now() {
 	return h+":"+m+":"+s;
 }
 
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------- DYNAMIC LOADING OF HTML  -------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+HTMLcontainer = new Array();
 function loadHTML(html_url,callback,ForceReload,keepLineBreaks) {
-
 	if (keepLineBreaks == undefined) keepLineBreaks = true;
-	var targetid = "LoadedHTML_"+encodeURI(html_url);
+	var targetid = "HTMLcontainer_"+encodeURI(html_url);
 	targetid = targetid.replace(/\//g,"_");
 	targetid = targetid.replace(/\./g,"_");
 	targetid = targetid.replace(/\:/g,"_");
@@ -123,7 +126,7 @@ function loadHTML(html_url,callback,ForceReload,keepLineBreaks) {
 	targetid = targetid.replace(/\>/g,"_");
 	targetid = targetid.replace(/\</g,"_");
 	var needsRemake = false;
-	var ourobject = myBrowser.loadedhtml[targetid];
+	var ourobject = HTMLcontainer[targetid];
 	if (isEmpty(ourobject) == false && ourobject.type == "htmlContainer") {
 		if (ForceReload == true) {
 			// go on
@@ -137,7 +140,7 @@ function loadHTML(html_url,callback,ForceReload,keepLineBreaks) {
 	}
 
 	if (needsRemake) {
-		myBrowser.loadedhtml[targetid] = new htmlContainerObject();
+		HTMLcontainer[targetid] = new htmlContainerObject();
 	}
 	
 	$.ajax({
@@ -148,87 +151,73 @@ function loadHTML(html_url,callback,ForceReload,keepLineBreaks) {
 			if (keepLineBreaks != true) {
 				doc = doc.replace(/(\r\n|\n|\r)/gm,"");
 			}
-			log("load success for "+html_url);
-			if (isEmpty(myBrowser.loadedhtml[targetid]) == false && myBrowser.loadedhtml[targetid].type == "htmlContainer") {
-				myBrowser.loadedhtml[targetid].fill(doc);
-				myBrowser.loadedhtml[targetid].status="loaded";
+			if (isEmpty(HTMLcontainer[targetid]) == false && HTMLcontainer[targetid].type == "htmlContainer") {
+				HTMLcontainer[targetid].fill(doc);
+				HTMLcontainer[targetid].status="loaded";
 			} else {
-				log("failed to assign loaded file to container object "+html_url);
 			}
 			if (!isEmpty(callback) && jQuery.isFunction(callback)) callback(targetid);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			log("load error for "+html_url);
-			log("reason: "+errorThrown);
-			myBrowser.loadedhtml[targetid].status = "LoadError";
-			myBrowser.loadedhtml[targetid].fill("<div>error loading content: "+errorThrown+"</div>");
+			HTMLcontainer[targetid].status = "LoadError";
+			HTMLcontainer[targetid].fill("<div>error loading content: "+errorThrown+"</div>");
 		}
 	});
 	return 0;   // load in progress
 }
 
 
-function log(text) {
-	if (myBrowser.log == undefined) myBrowser.log = new logObject();
-	myBrowser.log.add(text);
-	return myBrowser.log.len();
-}
-
 htmlContainerObject = function () {
 	this.data = "";
 	this.status = "new";
-	this.fill = function(data) {
-		this.data = data;
-		this.status = "filled";
-	}
-	this.clear = function() {
-		this.data = "";
-		this.status = "cleared";
-	}
 	this.type = "htmlContainer";
 	return this;
 }
 
+htmlContainerObject.prototype.fill = function(data) {
+	this.data = data;
+	this.status = "filled";
+}
 
-logObject = function() {
-	this.entries = new Array();
-	this.add = function(comment) {
-		var newEntry = {
-			id: tools_randomid(14),
-			text: comment,
-			timestamp: DateTime_Now()
-		}
-		this.entries.push(newEntry);
-	}
-	this.wipe = function() {
-		this.entries = new Array();
-	}
-	this.len = function() {
-		return this.entries.length;
-	}
-	this.content = function(which, order, format) {
-		if (isEmpty(format)) format = "<br>@@id::@@timestamp => @@text";
-		if (isEmpty(order)) order = "desc";
-		var output = "";
-		if (order == "desc") {
-			for (var i=this.entries.length-1; i>-1; i--) {
-				var Pattern = new RegExp(/@@id/g);
-				var nextline = format.replace(Pattern, i);
-				Pattern = new RegExp(/@@timestamp/g);
-				nextline = nextline.replace(Pattern, this.entries[i].timestamp);
-				Pattern = new RegExp(/@@text/g);
-				nextline = nextline.replace(Pattern, this.entries[i].text);
-				output += nextline;
-			}
-		}
-		return output;
-	}
-	return this;
+htmlContainerObject.prototype.clear = function() {
+	this.data = "";
+	this.status = "cleared";
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------- generating a hidden IFrame  -------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+function HiddenIframe__create() {
+	if ($("#HiddenIFrameContainer").length == 0) {
+		var IFcontainer = document.createElement("div");
+		$(IFcontainer).attr("id","HiddenIFrameContainer");
+		$(IFcontainer).css("visibility","hidden");
+		$(IFcontainer).css("width","0px");
+		$(IFcontainer).css("height","0px");
+		$(IFcontainer).css("left","0px");
+		$(IFcontainer).css("top","0px");
+		$(IFcontainer).css("position","absolute");
+		$(IFcontainer).css("overflow","hidden");
+		$("body").append(IFcontainer);
+	} 
+	var IFrame = document.createElement("iframe");
+	var i=0;
+	while ($("#HiddenIFrame_"+i).length != 0) { i++ };
+	$(IFrame).attr("id","HiddenIFrame_"+i);
+	$(IFrame).attr("src","");
+	$(IFrame).attr("name","HiddenIFrame_0"+i);
+	$(IFrame).css("visibility","hidden");
+	$(IFrame).css("width","0px");
+	$(IFrame).css("height","0px");
+	$(IFrame).css("left","0px");
+	$(IFrame).css("top","0px");
+	$(IFrame).css("position","absolute");
+	$(IFrame).css("overflow","hidden");
+	$("#HiddenIFrameContainer").append(IFrame);
+	return "HiddenIFrame_0"+i;
 }
 
 
-function isEmpty(variable) {
-	if (variable == undefined) return true;
-	if (variable == "") return true;
-	return false;
-}

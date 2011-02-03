@@ -54,6 +54,7 @@
 				$_SESSION[$bid]["REPLY"]["jobresult"] = "true";
 				array_push($_SESSION[$bid]["REPLY"]["SUCCESSES"], "logout successful");
 				$SessRemove = Session__RemoveFromDB();
+				$_SESSION[$bid]["REPLY"]["userinfo"] = User__GetInfo();
 				if ($SessRemove) {	
 					array_push($_SESSION[$bid]["REPLY"]["SUCCESSES"], "session removed from db successfully");
 					$_SESSION[$bid]["REPLY"]["DB_Session"] = "false";
@@ -92,7 +93,7 @@
 	}
 	
 
-	function User__GetInfo($uid) {
+	function User__GetInfo($uid = 0) {
 		GLOBAL $bid;
 		$_CFG = $_SESSION["CFG"];
 		$_QU = $_SESSION["QUERIES"];
@@ -129,7 +130,7 @@
 	
 	function User__logout() {
 		GLOBAL $bid;
-		$_SESSION[$bid]["user_id"] = "0";
+		$_SESSION[$bid]["userinfo"] = array();
 		return true;
 	}
 
