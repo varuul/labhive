@@ -1,0 +1,50 @@
+<div id="registration_dialog_container">
+	<table class="css__RegisterPanelTable">
+		<tr>
+			<td>
+				<img status="false"  width="32px" height="32px" src="" id="Registration_username_verified" />
+			</td>
+			<td>
+				username
+			</td>
+			<td>
+				<input id="Registration_username_Input" onkeyup="myRegistration.InputKeyUp(event);" type="text" size="30"></input>
+			</td>
+			
+		</tr>
+		<tr>
+			<td>
+				<img status="false"  width="32px" height="32px" src="" id="Registration_password_verified" />
+			</td>
+			<td>
+				password
+			</td>
+			<td>
+				<input id="Registration_password_Input" onkeyup="myRegistration.InputKeyUp(event);" type="password" size="30"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<img status="false" width="32px" height="32px" src="" id="Registration_email_verified" />
+			</td>
+			<td>
+				email
+			</td>
+			<td align="right">
+				<input id="Registration_email_Input" onkeyup="myRegistration.InputKeyUp(event);" type="text" size="30"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp
+			</td>
+			<td>
+				&nbsp
+			</td>
+			<td align="right">
+				<button id="Registration_Button_Submit" disabled="true" onclick="myRegistration.RegistrationPanelSubmit();">submit</button>
+			</td>
+		</tr>
+		
+	</table>
+</div>

@@ -15,6 +15,7 @@
 			'user_id' => 'user_id',
 			'username' => 'username',
 			'password' => 'password',
+			'email' => 'email',
 			'created_date' => 'created_date'
 		),
 		// THE INFOTABLE is a new way to organize data. with pure association, a thing and content
@@ -31,7 +32,7 @@
 			'content' => 'content'
 		),
 		'PossibleJobs' => array(
-			'login','logout','hello','console'
+			'login','logout','hello','console','username_availability','registration'
 		)
 	);
 	$_SESSION["CFG"]['db_name'] = '';

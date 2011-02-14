@@ -9,6 +9,7 @@
 		"adduser" => user->adduser($dbNOW, $bid),
 		"removeuser" => user->removeuser($dbNOW, $bid),
 		"adduserinfo" => user->adduserinfo($dbNOW, $bid),
+		"username_availability" => user->checkusername($dbNOW, $bid),
 		
 	);
 	

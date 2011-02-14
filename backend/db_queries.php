@@ -10,7 +10,9 @@
 		'get_userid_by_login' => 'SELECT '.$_CFG["usertable_fields"]["user_id"].' FROM '.$_CFG["tables"]["users"].' WHERE MD5('.$_CFG["usertable_fields"]["username"].')="@@_V_username" AND '.$_CFG["usertable_fields"]["password"].'=MD5(CONCAT("@@_V_password",'.$_CFG["usertable_fields"]["created_date"].'))',
 		
 		// @@_V_username
-		'get_userid_by_username' => 'SELECT '.$_CFG["usertable_fields"]["user_id"].' FROM '.$_CFG["tables"]["users"].' WHERE MD5('.$_CFG["usertable_fields"]["username"].')="@@_V_username"',
+		'get_userid_by_username' => 'SELECT '.$_CFG["usertable_fields"]["user_id"].' FROM '.$_CFG["tables"]["users"].' WHERE '.$_CFG["usertable_fields"]["username"].'="@@_V_username"',
+		// @@_V_username
+		'get_userid_by_MD5username' => 'SELECT '.$_CFG["usertable_fields"]["user_id"].' FROM '.$_CFG["tables"]["users"].' WHERE MD5('.$_CFG["usertable_fields"]["username"].')="@@_V_username"',
 
 		// @@_V_userid
 		// sample query: SELECT thing, content FROM info WHERE association_id="1" AND associated_table="0";

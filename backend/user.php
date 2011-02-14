@@ -65,6 +65,42 @@
 		} 
 	}
 	
+	if ($job == "username_availability") {
+		$res = User__UserNameExists($_POST["untest"]);
+		$_SESSION[$bid]["REPLY"]["jobresult"] = !$res;
+		$_SESSION[$bid]["REPLY"]["queriedUserName"] = $_POST["untest"];
+		array_push($_SESSION[$bid]["REPLY"]["SUCCESSES"], "usernamecheck done");
+	}
+	
+	if ($job == "registration") {
+		$exists = User__UserNameExists($_POST["unmd5"]);
+		if ($exists == false) {
+			$result = User__Add($_POST["username"], $_POST["password"]);
+			if ($result==true) {
+				array_push($_SESSION[$bid]["REPLY"]["SUCCESSES"], "user added");
+				$_SESSION[$bid]["REPLY"]["jobresult"] = "true";
+				$uid = User__GetUID($_POST["username"]);
+				if ($uid > -1) {
+					User__AddInfo($uid,"user_email",$_POST["email"]);
+					User__AddInfo($uid,"user_xslevel","1");
+					array_push($_SESSION[$bid]["REPLY"]["SUCCESSES"], "userinfo added");
+				
+				} else {
+					array_push($_SESSION[$bid]["REPLY"]["ERRORS"], "userinfo could not be added");
+				
+				}
+				
+			} else {
+				array_push($_SESSION[$bid]["REPLY"]["ERRORS"], "user insertion failed at DB level\r\n".$result);
+				$_SESSION[$bid]["REPLY"]["jobresult"] = "false";
+			}
+		} else {
+			array_push($_SESSION[$bid]["REPLY"]["ERRORS"], "username already in DB\r\n".$exists);
+			$_SESSION[$bid]["REPLY"]["jobresult"] = "false";
+		
+		}
+	}
+	
 	Quit();
 	
 	
@@ -92,6 +128,28 @@
 		}
 	}
 	
+	function User__GetUID($username = "") {
+		if ($username == "") return -1;
+		GLOBAL $bid;
+		$_CFG = $_SESSION["CFG"];
+		$_QU = $_SESSION["QUERIES"];
+		$RepArray = array(
+			"/@@_V_username/" => $username
+		);
+		$myQuery = DB_QueryReplace($_QU["get_userid_by_username"], $RepArray);
+		$Res = mysql_query($myQuery);	
+		if ($Res == false) {
+			return -1;
+		}
+		$RowCount = mysql_num_rows($Res);
+		if ($RowCount!=1) {
+			return -1;
+		} else {
+			$row = mysql_fetch_array($Res, MYSQL_ASSOC);
+			return $row[$_CFG["usertable_fields"]["user_id"]];
+		}
+		
+	}
 
 	function User__GetInfo($uid = 0) {
 		GLOBAL $bid;
@@ -187,7 +245,7 @@
 		$RepArray = array(
 			"/@@_V_username/" => $username
 		);
-		$myQuery = DB_QueryReplace($_QU["get_userid_by_username"], $RepArray);
+		$myQuery = DB_QueryReplace($_QU["get_userid_by_MD5username"], $RepArray);
 		$Res = mysql_query($myQuery);	
 		$RowCount = mysql_num_rows($Res);
 		if ($RowCount == 1) {
@@ -211,11 +269,8 @@
 		);
 		$myQuery = DB_QueryReplace($_QU["add_userInfo_by_userID"], $RepArray);
 		$Res = mysql_query($myQuery);	
-		$RowCount = mysql_num_rows($Res);
-		if ($RowCount == 1) {
+		if ($Res == true) {
 			return true;
-		} else if ($RowCount == 0) {
-			return false;
 		} else {
 			// should not happen
 			return true;

@@ -29,6 +29,7 @@ UserObject = function(myDad) {
 	this.FileName_login = "user.php";
 	// we need this fellow for enabling the browsers' autocomplete thing and potentially for more workarounds later on...
 	this.fakeFormActionTargetId = HiddenIframe__create();
+	$("#LOGINDIALOG__form").attr("target", this.fakeFormActionTargetId);
 }
 
 UserObject.prototype.init = function() {
