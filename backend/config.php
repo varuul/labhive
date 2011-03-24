@@ -1,9 +1,9 @@
 <?php
 	$_SESSION["CFG"] = array(
 		'tables' => array(
-			'users' => 'users',
-			'sessions' => 'sessions',
-			'info' => 'info'
+			'users' => 'lh_users',
+			'sessions' => 'lh_sessions',
+			'info' => 'lh_info'
 		),
 		'sessiontable_fields' => array(
 			'session_id' => 'session_id',
@@ -32,7 +32,10 @@
 			'content' => 'content'
 		),
 		'PossibleJobs' => array(
-			'login','logout','hello','console','username_availability','registration'
+			'login','logout','hello',  // user.php
+			'username_availability','registration',  // registration part of user.php
+			'console', // console.php
+			'crossquery_filter', 'crossquery_returnDataSets',"crossquery_getSavedQueries","crossquery_saveQuery","crossquery_savedQuery_delete"    // labhive_crossquery.php
 		)
 	);
 	$_SESSION["CFG"]['db_name'] = '';

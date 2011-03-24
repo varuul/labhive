@@ -13,6 +13,7 @@
 		$_SESSION[$bid]["REPLY"]["jobresult"] = "true";
 		if ($Session != false) {
 			$_SESSION[$bid]["REPLY"]["userinfo"] = User__GetInfo($Session);
+			$_SESSION[$bid]["userinfo"] = $_SESSION[$bid]["REPLY"]["userinfo"];
 		}
 	}
 	
@@ -33,6 +34,7 @@
 				$_SESSION[$bid]["REPLY"]["jobresult"] = "true";
 				$_SESSION[$bid]["REPLY"]["uid"] = $login;
 				$_SESSION[$bid]["REPLY"]["userinfo"] = User__GetInfo($login);
+				$_SESSION[$bid]["userinfo"] = $_SESSION[$bid]["REPLY"]["userinfo"];
 				$_SESSION[$bid]["REPLY"]["DB_Session"] = "true";
 			}
 		} else {

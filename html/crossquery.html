@@ -1,0 +1,279 @@
+	<div id="xQ-MAINTABS-CONTAINER">
+		<ul id="xQ-MAINTABS-LIST">
+			<li><a href="#xQ-MAINTABS-TABCONTENT-SETUP">SETUP</a></li>
+			<li><a href="#xQ-MAINTABS-TABCONTENT-STATS">STATS</a></li>
+			<li><a href="#xQ-MAINTABS-TABCONTENT-DATA">DATA</a></li>
+			<li><a href="#xQ-MAINTABS-TABCONTENT-GRAPHS">GRAPHS</a></li>
+			<li><a href="#xQ-MAINTABS-TABCONTENT-EXPORT">EXPORT</a></li>
+			<li><a href="#xQ-MAINTABS-TABCONTENT-HELP">HELP</a></li>
+			<li><a href="#xQ-MAINTABS-TABCONTENT-ABOUT">about crossQuery</a></li>
+		</ul>
+		<div id="xQ-MAINTABS-TABCONTENT-SETUP">
+			<div class="css__DIV_bordered">
+				<table class="css__cq_table">
+					<tr>
+						<td style="text-align:right">
+							Choose Dataset >>
+						</td>
+						<td>
+							<select id="cq_input__dataset_selection">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right">
+							Data-Fields >>
+						</td>
+						<td>
+							<div id="cq_input__datafields_container">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right">
+							Text-Fields >>
+						</td>
+						<td>
+							<div id="cq_input__textfields_container">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right">
+							ID-Field >>
+						</td>
+						<td>
+							<div id="cq_input__idfields_container">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right">
+							Query-Name >>
+						</td>
+						<td>
+							<input id="cq_input__query_name" size="60" value="your new query"></input>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right">
+							Filter-Code >>
+						</td>
+						<td>
+							<textarea id="cq_input__filter_code" width="100%" height="100%">sg3>mes1</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right">
+							Sort-Code >>
+						</td>
+						<td>
+							<input id="cq_input__sort_code" size="60" value="sg3"></input><br>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right">
+							Sort Orientation >> 
+						</td>
+						<td>
+							<select id="cq_input__sort_orientation">
+								<option selected="false" value="ASC">1...100</option>
+								<option selected="true" value="DESC">100...1</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right">
+							max retrieved results >>
+						</td>
+						<td>
+							<input id="cq_input__result_limit" size="6" value="50"></input>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="css__DIV_bordered">
+				<div style="text-align:right" >
+					<button id="cq_button__load" onclick="myCrossQuery.savedQuery__openPanel();">load query</button>
+					<button id="cq_button__save" onclick="myCrossQuery.saveQuery();">save query</button>
+					<button id="cq_button__run" onclick="myCrossQuery.runQuery();">run query</button> 
+				</div>
+			</div>
+			
+		</div>
+		<div id="xQ-MAINTABS-TABCONTENT-DATA">
+			
+		</div>
+		<div id="xQ-MAINTABS-TABCONTENT-STATS">
+			<table class="css__cq_table">
+				<tr>
+					<td>
+						max Rows after Filter / Total Rows In DataSet
+					</td>
+					<td class="css__cq_stats" id="cq_rows_filtered">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="xQ-MAINTABS-TABCONTENT-GRAPHS">
+			<div id="cq__linecheckboxes">
+			</div>
+			<br>
+			<button id="cq_graphs_button__draw">draw filtered</button>
+			<div id="cq_chart_container" style="width:1024px;height:768px">
+			</div>
+		</div>
+		<div id="xQ-MAINTABS-TABCONTENT-EXPORT">
+			
+			<div class="css__DIV_bordered">
+				to update (add all results to the export) click the icon <img title="update export data" id='button__export' class="imgbutton" onclick='onclick__exportupdate();' src="./img/crossQuery/update.png">
+			</div>
+			<div class="css__DIV_bordered">
+				CSV Format (field delimiter=";") for variable import (e.g. Excel, SigmaPlot, Origin, ...) >><br>
+				<textarea id="exporttext" cols="120" rows="20" ></textarea>
+			</div>
+		</div>
+		<div id="xQ-MAINTABS-TABCONTENT-ABOUT">
+			<div class="css__DIV_bordered">
+				<div align="center"><b>crossQuery</b> scientific DataFilter WebInterface!</div><br>
+				Problems, Comments, and Ideas are welcome!<br>
+				<br>
+				<div align="right">eMail contact: <a href='mailto:tw@labhive.com'>toni</a></div>
+				<br>	<br>	
+				<div class="css__DIV_bordered">
+					DISCLAIMERS / COPYRIGHTS:<br>
+					<div class="css__DIV_bordered">SOFTWARE:<br>
+						idea, concept and code by Toni U. Wagner, 2009-2011<br>	
+						crossQuery is a easy to use webinterface for cross-referenced querys on biological data like:<br> transcriptome-sequencings, ChIP-sequencings, MicroArray, Go-Terms, ...<br>	
+						crossQuery is FREE software! The Author DOES NOT take responsibility for lost data, hacked or broken servers or correct results!<br>	
+						IF you use this software in your research in its original or anyhow modified form you are obliged to CITE this publication:<br>	
+						--no publication yet--<br>	
+						you can NOT use any part of this code in a commercial product!!!<br>	
+					</div>
+					<div class="css__DIV_bordered">DATA:<br>
+						All queryable data accessible with this software belong to the following persons.<br>IF you want to use this data for anything you HAVE TO check back with them:<br>	
+						MF-DMRT1 Binding Site Data: Dr. Amaury Herpin, Dr. Manfred Schartl<br>	
+						Mes1 Transcriptome Data: Dr. Andreas Fischer, Eva Thoma, Dr. Toni Wagner, Dr. Manfred Schartl<br>	
+						SG3 Transcriptome Data: Dr. Andreas Fischer, Eva Thoma, Dr. Toni Wagner, Dr. Manfred Schartl<br>	
+						exo Transcriptome Data: Dr. Manfred Schartl<br>	
+						invasive Transcriptome Data: Dr. Manfred Schartl<br>	
+						hyperpig Transcriptome Data: Dr. Manfred Schartl<br>	
+						eye Transcriptome Data: Dr. Manfred Schartl<br>							
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="xQ-MAINTABS-TABCONTENT-HELP">
+			<div class="css__DIV_bordered">
+				<table class="ui-widget ui-widget-content">
+					<tr style="background-color:#222222">
+						<td>Mathematical rules
+						</td>
+						<td>simple
+						</td>
+						<td>SampleA > SampleB
+						</td>
+						<td>sg3>mes1
+						</td>						
+					</tr>
+					<tr style="background-color:#444444">
+						<td>
+						</td>
+						<td>typical fold
+						</td>
+						<td>SampleA/SampleB > 10
+						</td>
+						<td>sg3/mes1>10
+						</td>						
+					</tr>
+					<tr style="background-color:#222222">
+						<td>Coupling of subrules
+						</td>
+						<td>AND
+						</td>
+						<td>SampleA > SampleB AND Sample B > SampleC 
+							<br>Thresholding:
+							<br>SampleA/SampleB > 10 AND SampleB > 5
+						</td>
+						<td>sg3>mes1 and mes1>invasive
+							<br>sg3/mes1>10 and mes1>5
+						</td>						
+					</tr>
+					<tr style="background-color:#444444">
+						<td>
+						</td>
+						<td>OR
+						</td>
+						<td>SampleA > SampleB OR SampleB > SampleC
+						</td>
+						<td>sg3>mes1 or mes1>invasive
+						</td>						
+					</tr>
+					<tr style="background-color:#222222">
+						<td>
+						</td>
+						<td>mixed
+						</td>
+						<td>(SampleA>SampleB OR SampleA>200) AND (SampleC>20 AND SampleD<10)
+						</td>
+						<td>(sg3>mes1 OR sg3>200) AND (invasive>20 AND eye<10)
+						</td>
+					</tr>
+					<tr style="background-color:#444444">
+						<td>Logical NOT rules
+						</td>
+						<td>mathematical not equal
+						</td>
+						<td>SampleA != SampleB
+						</td>
+						<td>sg3!=mes1
+						</td>
+					</tr>
+					<tr style="background-color:#222222">
+						<td>Text-based queries
+						</td>
+						<td>Searching in descriptions
+						</td>
+						<td>find("a keyword you want to filter out",description)
+						</td>
+						<td>find("hox",description)
+						</td>
+					</tr>
+					<tr style="background-color:#444444">
+						<td>
+						</td>
+						<td>Searching in go-terms
+						</td>
+						<td>find("go-term text", goterms)
+						</td>
+						<td>find("dna binding",goterms)
+						</td>
+					</tr>
+					<tr style="background-color:#222222">
+						<td>
+						</td>
+						<td>Searching for specific go-terms
+						</td>
+						<td>find("go-term id", goterms)
+						</td>
+						<td>find("3677",goterms)
+						</td>
+					</tr>
+					<tr style="background-color:#444444">
+						<td>
+						</td>
+						<td>EXCLUDING keywords
+						</td>
+						<td>NOT find("keyword",description)
+						</td>
+						<td>NOT find("DNA",description)
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	

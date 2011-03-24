@@ -69,6 +69,7 @@ consoleObject.prototype.close = function() {
 }
 
 consoleObject.prototype.sendCommand = function() {
+	var thisConsole = this;
 	var myCommand = $("#"+this.myCommandAreaID);
 	var postinfo = {};	// generate an object to pass via POST
 	postinfo.job = "console";		// this is passed to tell the serverside php what we want to do
